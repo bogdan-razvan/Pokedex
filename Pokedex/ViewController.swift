@@ -56,13 +56,11 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             let rows = csv.rows
             
             for row in rows {
-                let pokeId = Int(row["id"]!)!
-                let pokeName = row["identifier"]!
-                
-                let poke = Pokemon(name: pokeName, pokedexId: pokeId)
-                pokemons.append(poke)
+                if let pokeId = row["id"] as? Int, let pokeName = row["identifier"] {
+                    let poke = Pokemon(name: pokeName, pokedexId: pokeId)
+                    pokemons.append(poke)
+                }
             }
-            
         } catch let error as NSError {
             print(error.debugDescription)
         }
